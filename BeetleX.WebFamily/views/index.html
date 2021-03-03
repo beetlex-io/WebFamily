@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Beetlex WebFamily</title>
+    <link href="/css/beetlex-v1.css" rel="stylesheet" />
+    <script src="/js/beetlex-v1.js"></script>
+</head>
+<body>
+    <div id="app">
+        <webfamily-menu @resize="menuSize=$event" :token="menus" :title="title" :logo="logoImg">
+
+        </webfamily-menu>
+        <div :class="menuSize=='min'?'header_min':'header_max'">
+            <keep-alive>
+                <component :is="headerModel"></component>
+            </keep-alive>
+        </div>
+
+        <div :class="menuSize=='min'?'context_min':'context_max'">
+            <keep-alive>
+                <el-tabs type="border-card" v-model="activeName" style="position:absolute;top:0px;left:0px;right:10px;bottom:10px;" class="win-tabs" :closable="true" @tab-click="onTabClick" @tab-remove="OnCloseWindows">
+                    <el-tab-pane v-for="item in windows" :label="item.title" :name="item.id">
+                        <component :is="item.model" :token="item.data" :winid="item.id"></component>
+                    </el-tab-pane>
+                </el-tabs>
+            </keep-alive>
+        </div>
+        <el-dialog 
+                   :visible.sync="loginDialogVisible" class="login-modal" :close-on-click-modal="false" :fullscreen="true" :show-close="false"
+                   width="500px"
+                   center>
+            <component :is="loginModel"></component>
+        </el-dialog>
+        <component v-if="footerModel" :is="footerModel"></component>
+    </div>
+    <script src="/beetlex/js/webfamily.js"></script>
+</body>
+</html>

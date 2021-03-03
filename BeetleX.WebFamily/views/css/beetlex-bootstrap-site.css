@@ -1,0 +1,136 @@
+﻿::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+    margin-top: -10px;
+    border-right-color: rgba(0, 0, 0, 0.00);
+    border-right-width: 4px;
+    border-right-style: solid;
+    background-color: #fff;
+    padding: 2px;
+}
+
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: #8d8d8d;
+    border-right-color: rgba(0, 0, 0, 0.00);
+    border-right-width: 4px;
+    border-right-style: solid;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.00);
+    border-right-color: rgba(0, 0, 0, 0.00);
+    border-right-width: 4px;
+    border-right-style: solid;
+    padding: 1px;
+}
+.navbar {
+    background-color: rgb(0, 179, 185);
+    box-shadow: 0px 0px 10px #808080;
+}
+
+.boot-title-logo {
+    height: 50px;
+    overflow: hidden;
+}
+
+    .boot-title-logo img {
+        margin-top: -76px;
+    }
+
+main {
+
+}
+
+.boot-main-menu {
+}
+
+.dropdown-menu.main-sub-menu.show {
+    background-color: rgba(0, 179, 185, 0.84);
+    box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.42);
+    border-color: transparent;
+    border-radius: 0px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+}
+
+.boot-main-item > .nav-link {
+    color: #fff;
+    padding: 10px 20px;
+ 
+}
+
+.boot-main-item a:hover {
+    background-color: rgba(255, 255, 255, 0.42);
+    transition: background-color 1s;
+}
+
+.sub-menu-item a {
+    padding: 5px 30px;
+    color: #fff;
+}
+
+    .sub-menu-item a:hover {
+        background-color: rgba(255, 255, 255, 0.42);
+        transition: background-color 1s;
+        color: #fff;
+    }
+.boot-main-item > .nav-link i {
+    margin-right: 5px;
+}
+
+.sub-menu-item i {
+    margin-right: 5px;
+}
+.navbar-nav .nav-link {
+    padding-left: 20px;
+}
+
+.boot-menu-active {
+    background-color: rgba(255, 255, 255, 0.42);
+}
+
+.navbar-dark .navbar-toggler {
+    color: #fff;
+    text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.67);
+}
+
+.dropdown-menu {
+    color: #fff;
+}
+
+.dropdown-menu.boot-windows-item.show {
+    
+}
+
+.boot-windows-item a {
+    font-size: 9pt;
+    color: #fff;
+}
+
+    .boot-windows-item a:hover {
+        background-color: rgba(255, 255, 255, 0.42);
+        transition: background-color 1s;
+        color: #fff;
+    }
+.navbar-dark .navbar-toggler {
+    border-color: #FFF;
+}
+main {
+    padding-top:80px;
+}
+.navbar-dark .navbar-toggler {
+    color: rgba(255, 255, 255, 0.30);
+}
+.modal-header
+{
+    background-color:rgb(0, 179, 185);
+    color:#fff;
+   
+}
+.modal-header h5{
+    font-size:12pt;
+}
