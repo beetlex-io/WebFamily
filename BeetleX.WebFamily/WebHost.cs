@@ -1,4 +1,5 @@
-﻿using BeetleX.FastHttpApi;
+﻿using BeetleX.EventArgs;
+using BeetleX.FastHttpApi;
 using BeetleX.FastHttpApi.EFCore.Extension;
 using BeetleX.FastHttpApi.Hosting;
 using BeetleX.FastHttpApi.Jwt;
@@ -12,6 +13,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Net.Http.Headers;
 using System.Reflection;
+using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,6 +27,8 @@ namespace BeetleX.WebFamily
 
         }
 
+        private HttpApiServer mServer;
+
         public static string Title { get; set; } = "BeetleX Webfamily";
 
         public static string LogoImg { get; set; } = "/images/logo.png";
@@ -33,9 +37,15 @@ namespace BeetleX.WebFamily
 
         public static string FooterModel { get; set; }
 
+        public static bool TabsEnabled { get; set; } = true;
+
+        public static string AppName { get; set; } = "null";
+
         public static string LoginModel { get; set; } = "webfamily-login";
 
         public static string HomeModel { get; set; } = "webfamily-home";
+
+        public static string HomeName { get; set; } = "Home";
 
         public static bool MustLogin { get; set; } = false;
 
@@ -63,7 +73,7 @@ namespace BeetleX.WebFamily
 
         private IHost mHost;
 
-        public bool ImportElementUI { get; set; } = true;
+        public bool ImportElementUI { get; set; } = false;
 
         public bool ImportBootstrapIcons { get; set; } = false;
 
@@ -71,7 +81,9 @@ namespace BeetleX.WebFamily
 
         public bool ImportFontawesome { get; set; } = false;
 
-        public PageStyle Page { get; set; } = PageStyle.ElementUI;
+        public static List<Menu>  Menus { get; set; } = new List<Menu>();
+
+        public PageStyle Page { get; set; } = PageStyle.ElementDashboard;
 
         public WebHost UseBootstrap(PageStyle style = PageStyle.Bootstrap)
         {
@@ -95,12 +107,12 @@ namespace BeetleX.WebFamily
             return this;
         }
 
-        public WebHost UseElement()
+        public WebHost UseElement(PageStyle pageStyle = PageStyle.ElementDashboard)
         {
             ImportElementUI = true;
             ImportBootstrap = false;
             ImportBootstrapIcons = false;
-            Page = PageStyle.ElementUI;
+            Page = pageStyle;
             WebHost.LoginModel = "webfamily-login";
             return this;
         }
@@ -120,7 +132,14 @@ namespace BeetleX.WebFamily
             if (ImportElementUI)
             {
                 resource.AddCss("beetlex-element.css");
-                resource.AddCss("beetlex-element-site.css");
+                if (Page == PageStyle.Element)
+                {
+                    resource.AddCss("beetlex-element-site.css");
+                }
+                else
+                {
+                    resource.AddCss("beetlex-element-dashboard.css");
+                }
             }
             if (ImportBootstrap)
             {
@@ -143,8 +162,6 @@ namespace BeetleX.WebFamily
                 resource.AddScript("element.js", "autobase.js");
             if (ImportBootstrap)
                 resource.AddScript("bootstrap.js");
-
-            server.ResourceCenter.SetDefaultPages("bootstrap-index.html");
             vue.CssRewrite("/css/{group}-{v}.css").JsRewrite("/js/{group}-{v}.js");
             resource.AddAssemblies(typeof(WebHost).Assembly);
             server.Register(typeof(WebHost).Assembly);
@@ -153,25 +170,79 @@ namespace BeetleX.WebFamily
                 server.Register(item);
                 resource.AddAssemblies(item);
             }
-            switch (Page)
-            {
-                case PageStyle.Bootstrap:
-                    server.ResourceCenter.SetDefaultPages("bootstrap-index.html");
+            WriteIndexFile(Page);
 
-                    break;
-                case PageStyle.BootstrapDashboard:
-                    server.ResourceCenter.SetDefaultPages("bootstrap-dashboard.html");
-
-                    break;
-                default:
-                    server.ResourceCenter.SetDefaultPages("index.html");
-
-                    break;
-            }
 
             server.AddExts("ttf;woff;ico;woff2;svg;eot");
             if (mUseJwt)
                 server.UseJWT();
+        }
+
+        private void WriteIndexFile(PageStyle style)
+        {
+            string fileName = "BeetleX.WebFamily.views.";
+            switch (Page)
+            {
+                case PageStyle.Bootstrap:
+                    fileName += "bootstrap-index.html";
+
+                    break;
+                case PageStyle.BootstrapDashboard:
+                    fileName += "bootstrap-dashboard.html";
+
+                    break;
+                case PageStyle.ElementDashboard:
+                    fileName += "element-dashboard.html";
+                    break;
+                case PageStyle.Element:
+                    fileName += "element-index.html";
+                    break;
+                default:
+                    return;
+            }
+            var stream = typeof(WebHost).Assembly.GetManifestResourceStream(fileName);
+            var pagefile = mServer.Options.StaticResourcePath;
+            if (!pagefile.EndsWith(System.IO.Path.DirectorySeparatorChar))
+                pagefile += System.IO.Path.DirectorySeparatorChar;
+            pagefile += "index.html";
+            if (!System.IO.File.Exists(pagefile))
+            {
+                using (System.IO.Stream fileStream = System.IO.File.Open(pagefile, System.IO.FileMode.Create))
+                {
+                    stream.CopyTo(fileStream);
+                    fileStream.Flush();
+                }
+            }
+        }
+        private void OutputLogo()
+        {
+            AssemblyCopyrightAttribute productAttr = typeof(WebHost).Assembly.GetCustomAttribute<AssemblyCopyrightAttribute>();
+            var logo = "\r\n";
+            logo += " -----------------------------------------------------------------------------\r\n";
+            logo +=
+@"          ____                  _     _         __   __
+         |  _ \                | |   | |        \ \ / /
+         | |_) |   ___    ___  | |_  | |   ___   \ V / 
+         |  _ <   / _ \  / _ \ | __| | |  / _ \   > <  
+         | |_) | |  __/ |  __/ | |_  | | |  __/  / . \ 
+         |____/   \___|  \___|  \__| |_|  \___| /_/ \_\ 
+
+                              Web SPA plug-in for BeetleX
+
+";
+            logo += " -----------------------------------------------------------------------------\r\n";
+            logo += $" {productAttr.Copyright}\r\n";
+            logo += $" ServerGC    [{GCSettings.IsServerGC}]\r\n";
+            logo += $" BeetleX     Version [{typeof(BeetleX.BXException).Assembly.GetName().Version}]\r\n";
+            logo += $" FastHttpApi Version [{ typeof(HttpApiServer).Assembly.GetName().Version}] \r\n";
+            logo += $" BeetleX.WebFamily   Version [{ typeof(WebHost).Assembly.GetName().Version}] \r\n";
+            logo += " -----------------------------------------------------------------------------\r\n";
+            foreach (var item in mServer.BaseServer.Options.Listens)
+            {
+                logo += $" {item}\r\n";
+            }
+            logo += " -----------------------------------------------------------------------------\r\n";
+            mServer.Log(LogType.Info, null, logo);
         }
 
         public WebHost UseJWT()
@@ -236,6 +307,8 @@ namespace BeetleX.WebFamily
                 },
                 server =>
                 {
+                    mServer = server;
+                    mServer.WriteLogo = OutputLogo;
                     OnInitServer(server);
                     mServerInitialize?.Invoke(server, server.Vue(), server.GetWebFamily());
                 },

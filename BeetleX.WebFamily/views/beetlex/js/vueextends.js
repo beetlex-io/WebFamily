@@ -45,9 +45,9 @@ Vue.prototype.$nformat = function (value) {
     return new Intl.NumberFormat().format(value);
 }
 Vue.prototype.$confirmMsg = function (msg, callback, cancel) {
-    this.$confirm(msg, '疑问', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+    this.$confirm(msg, 'Question', {
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
         type: 'warning'
     }).then(() => { callback(); }).catch(() => {
         if (cancel)
@@ -72,8 +72,8 @@ Vue.prototype.$successMsg = function (msg) {
 };
 Vue.prototype.$confirmInput = function (msg, title, callback, pattern, errormsg) {
     this.$prompt(msg, title, {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
         inputPattern: pattern,
         inputErrorMessage: errormsg
     }).then((value) => {
@@ -81,9 +81,9 @@ Vue.prototype.$confirmInput = function (msg, title, callback, pattern, errormsg)
     }).catch(() => { });
 }
 Vue.prototype.$confirmPassword = function (msg, callback) {
-    this.$prompt(msg, "密码", {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+    this.$prompt(msg, "Password", {
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
         inputType: 'password'
     }).then((value) => {
         callback(value)

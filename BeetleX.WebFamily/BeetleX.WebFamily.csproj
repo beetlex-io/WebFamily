@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Version>1.2.9.2</Version>
+    <Version>1.3.6.7</Version>
     <Authors>henryfan</Authors>
     <Company>beetlex.io</Company>
     <Copyright>Copyright © 2019-2021  beetlex.io</Copyright>
@@ -14,8 +14,8 @@ web: Axios+Vue+ElementUI|Bootstrap5.0</Description>
 Server : Webapi+Websocket+JWT+EFCore+Redis
 web: Axios+Vue+ElementUI|Bootstrap5.0s</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/beetlex-io</PackageProjectUrl>
-    <AssemblyVersion>1.2.9.2</AssemblyVersion>
-    <FileVersion>1.2.9.2</FileVersion>
+    <AssemblyVersion>1.3.6.7</AssemblyVersion>
+    <FileVersion>1.3.6.7</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -42,6 +42,7 @@ web: Axios+Vue+ElementUI|Bootstrap5.0s</PackageReleaseNotes>
     <None Remove="views\css\beetlex-bootstrap-icons.css" />
     <None Remove="views\css\beetlex-bootstrap-site.css" />
     <None Remove="views\css\beetlex-bootstrap.css" />
+    <None Remove="views\css\beetlex-element-dashboard.css" />
     <None Remove="views\css\beetlex-element-site.css" />
     <None Remove="views\css\beetlex-element.css" />
     <None Remove="views\css\fontawesome.css" />
@@ -56,6 +57,8 @@ web: Axios+Vue+ElementUI|Bootstrap5.0s</PackageReleaseNotes>
     <None Remove="views\beetlex\js\FileLoader.js" />
     <None Remove="views\beetlex\js\vue.js" />
     <None Remove="views\beetlex\js\vueextends.js" />
+    <None Remove="views\element-dashboard.html" />
+    <None Remove="views\element-index.html" />
     <None Remove="views\webfonts\fa-brands-400.eot" />
     <None Remove="views\webfonts\fa-brands-400.svg" />
     <None Remove="views\webfonts\fa-brands-400.ttf" />
@@ -78,7 +81,6 @@ web: Axios+Vue+ElementUI|Bootstrap5.0s</PackageReleaseNotes>
     <None Remove="views\images\menu-back.jpg" />
     <None Remove="views\images\right.png" />
     <None Remove="views\images\wechatpay.png" />
-    <None Remove="views\index.html" />
     <None Include="..\..\..\..\beetlex200.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
@@ -107,9 +109,10 @@ web: Axios+Vue+ElementUI|Bootstrap5.0s</PackageReleaseNotes>
     <EmbeddedResource Include="views\bootstrap-index.html" />
     <EmbeddedResource Include="views\css\beetlex-bootstrap-dashboard.css" />
     <EmbeddedResource Include="views\css\beetlex-bootstrap-site.css" />
-    <EmbeddedResource Include="views\css\beetlex-element-site.css" />
+    <EmbeddedResource Include="views\css\beetlex-element-dashboard.css" />
     <EmbeddedResource Include="views\css\beetlex-bootstrap-icons.css" />
     <EmbeddedResource Include="views\css\beetlex-bootstrap.css" />
+    <EmbeddedResource Include="views\css\beetlex-element-site.css" />
     <EmbeddedResource Include="views\css\fontawesome.css" />
     <EmbeddedResource Include="views\css\fonts\bootstrap-icons.woff" />
     <EmbeddedResource Include="views\css\fonts\bootstrap-icons.woff2" />
@@ -123,6 +126,7 @@ web: Axios+Vue+ElementUI|Bootstrap5.0s</PackageReleaseNotes>
     <EmbeddedResource Include="views\beetlex\js\FileLoader.js" />
     <EmbeddedResource Include="views\beetlex\js\vue.js" />
     <EmbeddedResource Include="views\beetlex\js\vueextends.js" />
+    <EmbeddedResource Include="views\element-index.html" />
     <EmbeddedResource Include="views\webfonts\fa-brands-400.eot" />
     <EmbeddedResource Include="views\webfonts\fa-brands-400.svg" />
     <EmbeddedResource Include="views\webfonts\fa-brands-400.ttf" />
@@ -145,16 +149,15 @@ web: Axios+Vue+ElementUI|Bootstrap5.0s</PackageReleaseNotes>
     <EmbeddedResource Include="views\images\menu-back.jpg" />
     <EmbeddedResource Include="views\images\right.png" />
     <EmbeddedResource Include="views\images\wechatpay.png" />
-    <EmbeddedResource Include="views\index.html" />
+    <EmbeddedResource Include="views\element-dashboard.html" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BeetleX.EFCore.Extension" Version="0.9.8" />
-    <PackageReference Include="BeetleX.FastHttpApi" Version="1.9.4.3" />
     <PackageReference Include="BeetleX.FastHttpApi.EFCore.Extension" Version="0.7.7" />
     <PackageReference Include="BeetleX.FastHttpApi.Hosting" Version="1.3.6" />
     <PackageReference Include="BeetleX.FastHttpApi.Jwt" Version="0.7.5.3" />
-    <PackageReference Include="BeetleX.FastHttpApi.VueExtend" Version="1.1.0" />
+    <PackageReference Include="BeetleX.FastHttpApi.VueExtend" Version="1.1.2" />
     <PackageReference Include="BeetleX.Redis" Version="1.0.2" />
   </ItemGroup>
 

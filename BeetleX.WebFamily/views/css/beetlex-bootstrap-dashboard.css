@@ -121,7 +121,7 @@
 
 
 .navbar.navbar-dark.sticky-top.bg-dark {
-    background-color: rgb(0, 179, 185) !important;
+    background-color: #40b0e2 !important;
     min-height: 70px;
 }
 
@@ -150,7 +150,7 @@ main {
     padding-top:20px;
 }
 .bg-light {
-    background-color: rgb(0, 179, 185) !important;
+    background-color: #40b0e2 !important;
 }
 .boot-main-item > .nav-link {
     color: #fff;
@@ -207,7 +207,7 @@ main {
     overflow:auto;
 }
 .modal-header {
-    background-color: rgb(0, 179, 185);
+    background-color: #40b0e2;
     color: #fff;
 }
 

@@ -1,9 +1,23 @@
 ﻿var page = {};
 
-
-
 beetlex.errorHandlers['401'] = function () {
     page.OnOpenLogin();
+};
+Vue.prototype.$getID = function () {
+    page.controlid = page.controlid + 1;
+    return page.controlid;
+};
+Vue.prototype.$pformat = function (num, total) {
+    var value = (Math.round(num / total * 10000) / 100.00);
+    if (value > 100)
+        value = 100;
+    if (value < 0)
+        value = 0;
+    return total <= 0 ? "0%" : value + "%";
+};
+
+Vue.prototype.$getTitle = function () {
+    return page.title;
 };
 
 Vue.prototype.$toHome = function () {
@@ -42,11 +56,16 @@ Vue.prototype.$getUser = function () {
 Vue.prototype.$addResize = function (handler) {
     __addResizeHandler(handler);
 };
-
+Vue.prototype.$getSN = function () {
+    if (page.sn)
+        return page.sn;
+    return {};
+};
 Vue.prototype.$resizeWindow = function () {
     __resize();
 };
 var pageData = {
+    controlid: 1,
     windows: [],
     menuSize: 'min',
     menus: [],
@@ -56,16 +75,20 @@ var pageData = {
     loginModel: 'webfamily-login',
     headerModel: '',
     homeModel: '',
+    homeName: 'Home',
     footerModel: '',
     logoImg: '/images/logo.png',
     title: '',
     activeName: 'home',
+    tabsEnabled: true,
     parentName: '',
     loginDialogVisible: false,
     activeModel: {
         model: '', data: {}, id: ''
     },
     loginHandler: null,
+    sn: {},
+    appName: 'null'
 };
 page = new Vue({
     el: '#app',
@@ -86,7 +109,7 @@ page = new Vue({
             }
             if (index >= 0) {
                 this.windows.splice(index, 1);
-                if (this.activeModel.id == id || this.activeName==id) {
+                if (this.activeModel.id == id || this.activeName == id) {
                     this.activeModel = this.windows[index - 1];
                     this.activeName = this.activeModel.id;
                 }
@@ -100,11 +123,16 @@ page = new Vue({
         onSignout() {
             this.$get('/website/Signout').then(r => {
                 this.user = null;
-                this.OnOpenLogin();
+                if (this.mustLogin == true && !this.user) {
+                    this.OnOpenLogin();
+                }
+                else {
+                    this.onToHome();
+                }
             });
         },
         onToHome() {
-            this.$openWindow('home', "主页", this.homeModel);
+            this.$openWindow('home', this.homeName, this.homeModel);
         },
         OnLoadInfo() {
             this.$get('/website/LoadInfo').then(r => {
@@ -117,8 +145,21 @@ page = new Vue({
                 this.title = r.Title;
                 this.user = r.User;
                 this.role = r.Role;
+                this.homeName = r.HomeName;
+                this.tabsEnabled = r.TabsEnabled;
+                this.appName = r.AppName;
                 document.title = this.title;
-                this.OnOpenLogin();
+                this.$get('/__GET_SN?name=' + this.appName).then(r => {
+                    this.sn = r;
+                    console.log("getsn", this.sn);
+                });
+                if (this.mustLogin == true && !this.user) {
+                    this.OnOpenLogin();
+                }
+                else {
+                    this.onToHome();
+                }
+
             });
         },
         onTabClick() {
@@ -157,25 +198,20 @@ page = new Vue({
             this.activeModel = e;
             this.activeName = e.id;
             this.$resizeWindow();
-            
+
         },
         OnOpenLogin: function () {
-            if (this.mustLogin == true && !this.user) {
-                if (this.loginHandler) {
-                    this.loginHandler();
-                }
-                else {
-                    this.loginDialogVisible = true;
-                }
-                console.log("open login!");
+            if (this.loginHandler) {
+                this.loginHandler();
             }
             else {
-                this.onToHome();
+                this.loginDialogVisible = true;
             }
         },
     },
     mounted() {
         this.OnLoadInfo();
+
     }
 })
 

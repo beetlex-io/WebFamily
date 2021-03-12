@@ -6,21 +6,20 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.1": {
-      "BeetleX.WebFamily/1.2.9.2": {
+      "BeetleX.WebFamily/1.3.6.7": {
         "dependencies": {
           "BeetleX.EFCore.Extension": "0.9.8",
-          "BeetleX.FastHttpApi": "1.9.4.3",
           "BeetleX.FastHttpApi.EFCore.Extension": "0.7.7",
           "BeetleX.FastHttpApi.Hosting": "1.3.6",
           "BeetleX.FastHttpApi.Jwt": "0.7.5.3",
-          "BeetleX.FastHttpApi.VueExtend": "1.1.0",
+          "BeetleX.FastHttpApi.VueExtend": "1.1.2",
           "BeetleX.Redis": "1.0.2"
         },
         "runtime": {
           "BeetleX.WebFamily.dll": {}
         }
       },
-      "BeetleX/1.6.5.40": {
+      "BeetleX/1.6.5.41": {
         "dependencies": {
           "System.Buffers": "4.5.1",
           "System.Memory": "4.5.4",
@@ -28,8 +27,8 @@
         },
         "runtime": {
           "lib/netstandard2.0/BeetleX.dll": {
-            "assemblyVersion": "1.6.5.40",
-            "fileVersion": "1.6.5.40"
+            "assemblyVersion": "1.6.5.41",
+            "fileVersion": "1.6.5.41"
           }
         }
       },
@@ -48,23 +47,23 @@
           }
         }
       },
-      "BeetleX.FastHttpApi/1.9.4.3": {
+      "BeetleX.FastHttpApi/1.9.5": {
         "dependencies": {
-          "BeetleX": "1.6.5.40",
+          "BeetleX": "1.6.5.41",
           "BeetleX.Tracks": "0.7.5",
           "Newtonsoft.Json": "12.0.3"
         },
         "runtime": {
           "lib/netcoreapp2.1/BeetleX.FastHttpApi.dll": {
-            "assemblyVersion": "1.9.4.3",
-            "fileVersion": "1.9.4.3"
+            "assemblyVersion": "1.9.5.0",
+            "fileVersion": "1.9.5.0"
           }
         }
       },
       "BeetleX.FastHttpApi.EFCore.Extension/0.7.7": {
         "dependencies": {
           "BeetleX.EFCore.Extension": "0.9.8",
-          "BeetleX.FastHttpApi": "1.9.4.3"
+          "BeetleX.FastHttpApi": "1.9.5"
         },
         "runtime": {
           "lib/netcoreapp2.1/BeetleX.FastHttpApi.EFCore.Extension.dll": {
@@ -75,7 +74,7 @@
       },
       "BeetleX.FastHttpApi.Hosting/1.3.6": {
         "dependencies": {
-          "BeetleX.FastHttpApi": "1.9.4.3",
+          "BeetleX.FastHttpApi": "1.9.5",
           "Microsoft.Extensions.Hosting": "5.0.0"
         },
         "runtime": {
@@ -87,7 +86,7 @@
       },
       "BeetleX.FastHttpApi.Jwt/0.7.5.3": {
         "dependencies": {
-          "BeetleX.FastHttpApi": "1.9.4.3",
+          "BeetleX.FastHttpApi": "1.9.5",
           "System.IdentityModel.Tokens.Jwt": "6.8.0"
         },
         "runtime": {
@@ -97,20 +96,20 @@
           }
         }
       },
-      "BeetleX.FastHttpApi.VueExtend/1.1.0": {
+      "BeetleX.FastHttpApi.VueExtend/1.1.2": {
         "dependencies": {
-          "BeetleX.FastHttpApi": "1.9.4.3"
+          "BeetleX.FastHttpApi": "1.9.5"
         },
         "runtime": {
           "lib/netcoreapp2.1/BeetleX.FastHttpApi.VueExtend.dll": {
-            "assemblyVersion": "1.1.0.0",
-            "fileVersion": "1.1.0.0"
+            "assemblyVersion": "1.1.2.0",
+            "fileVersion": "1.1.2.0"
           }
         }
       },
       "BeetleX.Redis/1.0.2": {
         "dependencies": {
-          "BeetleX": "1.6.5.40",
+          "BeetleX": "1.6.5.41",
           "BeetleX.Tracks": "0.7.5",
           "MessagePack": "2.1.115",
           "Newtonsoft.Json": "12.0.3",
@@ -837,17 +836,17 @@
     }
   },
   "libraries": {
-    "BeetleX.WebFamily/1.2.9.2": {
+    "BeetleX.WebFamily/1.3.6.7": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "BeetleX/1.6.5.40": {
+    "BeetleX/1.6.5.41": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ozcx8145PUOyk4gj6nKWVABim8EM7IfJ1xzFcfuvolVBx0LAAbN/HeTc/NN8gYEgcQb1zr94cbDfCpa/ogEH6w==",
-      "path": "beetlex/1.6.5.40",
-      "hashPath": "beetlex.1.6.5.40.nupkg.sha512"
+      "sha512": "sha512-TNRIKC6Nbk0K1Du2MNakF3/rPDx12f4z2QjI5s7a7frJeexPSwkkMbFLR6DHJAuSqa3NTR4s1Y/KD92WlU5TgQ==",
+      "path": "beetlex/1.6.5.41",
+      "hashPath": "beetlex.1.6.5.41.nupkg.sha512"
     },
     "BeetleX.EFCore.Extension/0.9.8": {
       "type": "package",
@@ -856,12 +855,12 @@
       "path": "beetlex.efcore.extension/0.9.8",
       "hashPath": "beetlex.efcore.extension.0.9.8.nupkg.sha512"
     },
-    "BeetleX.FastHttpApi/1.9.4.3": {
+    "BeetleX.FastHttpApi/1.9.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1i+6EvchuLKb3SS9W+0P8FCmcm5S4Twu0ylTrWH/qCBWqfJ2WNgbOYg0juENp+3mwUQ7Th4FISQEYhKWGR6N0w==",
-      "path": "beetlex.fasthttpapi/1.9.4.3",
-      "hashPath": "beetlex.fasthttpapi.1.9.4.3.nupkg.sha512"
+      "sha512": "sha512-BOCYCu8Yx6So+fNi6WunmjImtu1/CiAOeuNdDIFvTIESGRjAiAy0rFZmOkKUE15cW1aZ0knpziWd6mVuDWvJ3Q==",
+      "path": "beetlex.fasthttpapi/1.9.5",
+      "hashPath": "beetlex.fasthttpapi.1.9.5.nupkg.sha512"
     },
     "BeetleX.FastHttpApi.EFCore.Extension/0.7.7": {
       "type": "package",
@@ -884,12 +883,12 @@
       "path": "beetlex.fasthttpapi.jwt/0.7.5.3",
       "hashPath": "beetlex.fasthttpapi.jwt.0.7.5.3.nupkg.sha512"
     },
-    "BeetleX.FastHttpApi.VueExtend/1.1.0": {
+    "BeetleX.FastHttpApi.VueExtend/1.1.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-TsK1WAntKq9/M28+yzV2pOPKrE1QjGf1B5BPN6oLf9kQZbHaFKDJI7W8P9wchFQtfHzt3EUZl3N5Z2ImZMdvqw==",
-      "path": "beetlex.fasthttpapi.vueextend/1.1.0",
-      "hashPath": "beetlex.fasthttpapi.vueextend.1.1.0.nupkg.sha512"
+      "sha512": "sha512-O5BRvLSnu4pFy/pOoO2V5/KwCkz1VraEUrevpPp7HygEkMotgDoHeXvC5ZYZSC1LT/waq/AdJARC0/yIiHN7sg==",
+      "path": "beetlex.fasthttpapi.vueextend/1.1.2",
+      "hashPath": "beetlex.fasthttpapi.vueextend.1.1.2.nupkg.sha512"
     },
     "BeetleX.Redis/1.0.2": {
       "type": "package",

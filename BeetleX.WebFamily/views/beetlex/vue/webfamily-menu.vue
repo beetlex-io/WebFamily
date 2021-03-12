@@ -1,46 +1,34 @@
-﻿<div>
-    <div :class="[full=='min'?'menu_full':'menu_min']">
-        <div class="menu-panel">
-            <div v-if="full=='min'" class="menu-panel-header">
-                <div class="web-logo">
-                    <img :src="logo" />
+﻿<el-menu :default-active="active" :mode="menutype" @select="handleOpen" class="menu-bar" :collapse="full!='min'" size="small">
+    <template v-for="item in menus">
+        <el-submenu v-if="item.Childs.length>0" :index="item.ID"  v-bind:key="item.ID">
+            <template slot="title">
+                <i v-if="item.Img" :class="item.Img"></i>
+                <span>{{item.Name}}</span>
+            </template>
 
-                </div>
-                <div class="web-title">{{webTitle}}</div>
-                <div class="menu-resize-btn">
-                    <a title="最小化菜单" size="mini" @click="OnResizeMenu('max')">
-                        <i class="el-icon-caret-left"></i>
-                    </a>
-                </div>
-            </div>
-            <div v-else class="menu-resize-min-btn">
-                <a title="最大化菜单" size="mini" @click="OnResizeMenu('min')">
-                    <i class="el-icon-caret-right"></i>
-                </a>
-            </div>
-            <el-menu default-active="1" @select="handleOpen" class="menu-bar" :collapse="full!='min'" size="small">
-                <template v-for="item in menus">
-                    <webfamily-submenu v-if="item.Childs.length>0" :token="item">
+            <el-menu-item v-for="sitem in item.Childs" :index="sitem.ID" v-bind:key="sitem.ID">
+                <i v-if="sitem.Img" :class="sitem.Img"></i>
+                <span slot="title">{{sitem.Name}}</span>
+            </el-menu-item>
 
-                    </webfamily-submenu>
-                    <el-menu-item v-else :index="item.ID">
-                        <i v-if="item.Img" :class="item.Img"></i>
-                        <span slot="title">{{item.Name}}</span>
-                    </el-menu-item>
-                </template>
-            </el-menu>
-        </div>
-    </div>
-</div>
+        </el-submenu>
+        <el-menu-item v-else :index="item.ID">
+            <i v-if="item.Img" :class="item.Img"></i>
+            <span slot="title">{{item.Name}}</span>
+        </el-menu-item>
+    </template>
+</el-menu>
+
 
 <script>
     export default {
-        props: ['token', 'title', 'logo'],
+        props: ['token', 'size', 'menutype'],
         data: function () {
             return {
-                full: 'min',
+                full: this.size,
                 webTitle: this.title,
-                menus: this.token ? this.token : []
+                menus: this.token ? this.token : [],
+                active: '',
             }
         },
         methods: {
@@ -54,16 +42,21 @@
                         break;
                 }
             },
-           
+
             OnResizeMenu(value) {
                 this.full = value;
                 this.$emit('resize', value)
             },
         },
         watch: {
+            size(val) {
+                this.full = val;
+            },
             token(val) {
                 this.menus = val;
-                console.log();
+
+                if (this.menus.length > 0)
+                    this.active = this.menus[0].ID;
             },
             title(val) {
                 this.webTitle = val;

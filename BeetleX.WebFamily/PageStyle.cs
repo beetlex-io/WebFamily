@@ -6,7 +6,9 @@ namespace BeetleX.WebFamily
 {
     public enum PageStyle
     {
-        ElementUI,
+        None,
+        Element,
+        ElementDashboard,
         Bootstrap,
         BootstrapDashboard
     }

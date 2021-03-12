@@ -26,7 +26,7 @@
     padding: 1px;
 }
 .navbar {
-    background-color: rgb(0, 179, 185);
+    background-color: #40b0e2;
     box-shadow: 0px 0px 10px #808080;
 }
 
@@ -47,10 +47,11 @@ main {
 }
 
 .dropdown-menu.main-sub-menu.show {
-    background-color: rgba(0, 179, 185, 0.84);
-    box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.42);
+    background-color: rgba(64, 176, 226, 0.90);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.23);
     border-color: transparent;
     border-radius: 0px;
+    margin-top: 11px;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -91,13 +92,19 @@ main {
 
 .boot-menu-active {
     background-color: rgba(255, 255, 255, 0.42);
+   
+    transition: background-color 1s;
 }
 
 .navbar-dark .navbar-toggler {
     color: #fff;
     text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.67);
 }
-
+.nav-item
+{
+    margin-left:2px;
+    margin-right:2px;
+}
 .dropdown-menu {
     color: #fff;
 }
@@ -127,7 +134,7 @@ main {
 }
 .modal-header
 {
-    background-color:rgb(0, 179, 185);
+    background-color:#40b0e2;
     color:#fff;
    
 }

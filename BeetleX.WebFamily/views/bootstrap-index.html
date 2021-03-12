@@ -31,7 +31,7 @@
                                 </a>
 
                             </li>
-                            <li v-else class="nav-item dropdown boot-main-item">
+                            <li v-else :class="[(item.ID==parentName)?'nav-item dropdown boot-main-item boot-menu-active':'nav-item dropdown boot-main-item']">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
                                     <i v-if="item.Img" :class="item.Img"></i>
                                     {{item.Name}}

@@ -18,6 +18,8 @@ namespace BeetleX.WebFamily
             IList<Menu> menus = new List<Menu>();
             if (WebHost.GetMenus != null)
                 menus = await WebHost.GetMenus(jwt_user, jwt_role, context);
+            else
+                menus = WebHost.Menus;
             return new
             {
                 WebHost.MustLogin,
@@ -29,7 +31,10 @@ namespace BeetleX.WebFamily
                 User = user?.Name,
                 Role = user?.Role,
                 Menus = menus,
-                WebHost.FooterModel
+                WebHost.FooterModel,
+                WebHost.HomeName,
+                WebHost.TabsEnabled,
+                WebHost.AppName
             };
         }
 
