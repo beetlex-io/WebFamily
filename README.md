@@ -1,5 +1,7 @@
 # BeetleX快速Web开发框架
-Beetlex基于前后端分离设计的Web快速开发组件，服务端基于BeetleX.FastHttpApi,前端则以Vuejs为基础核心默认集成element和FontAwesome。在数据交互上集成axios以上前端组件的js和css进了默认集成无须添加。除了集成这些基础功能外，组件还配套了页面布局，菜单和权限登陆功能；在组件的支持下只需要编写vue的业务组件即可装配成成一个单页面的Web应用。[UI生成工具](https://beetlex-io.com/uieditor/)
+Beetlex基于前后端分离设计的Web快速开发组件，服务端基于BeetleX.FastHttpApi,前端则以Vuejs为基础核心默认集成element和FontAwesome。在数据交互上集成axios以上前端组件的js和css进了默认集成无须添加。除了集成这些基础功能外，组件还配套了页面布局，菜单和权限登陆功能；在组件的支持下只需要编写vue的业务组件即可装配成成一个单页面的Web应用。
+
+[UI生成工具](https://beetlex-io.com/uieditor/)
 
 ## 用户权限管理模块 (BeetleX.WebFamily.BasicInformation)
 - 用户管理
