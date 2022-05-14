@@ -1,0 +1,31 @@
+﻿
+.order-item {
+    font-size:10pt;
+}
+.order-item .el-form-item__label {
+    font-weight: bold;
+    padding: 0px 5px;
+}
+
+.order-item .el-form-item {
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: #cfcfcf;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #cfcfcf;
+    border-radius: 8px;
+}
+.order-item .el-form-item__content {
+    border-bottom-width: 1px;
+    border-bottom-style: dashed;
+    border-bottom-color: #cfcfcf;
+    background-color:rgba(255, 255, 255, 0.34);
+    padding:0px 5px;
+    border-radius:6px;
+    font-size:10pt;
+}
+.order-item .el-form-item {
+    margin-right: 20px;
+    padding: 0px 5px;
+}

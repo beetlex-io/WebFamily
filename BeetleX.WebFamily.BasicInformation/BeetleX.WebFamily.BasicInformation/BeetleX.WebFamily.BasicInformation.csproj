@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="views\vue\baseinfo-department-editor.vue" />
+    <None Remove="views\vue\baseinfo-department-list.vue" />
+    <None Remove="views\vue\baseinfo-header.vue" />
+    <None Remove="views\vue\baseinfo-permission-editor.vue" />
+    <None Remove="views\vue\baseinfo-permission-list.vue" />
+    <None Remove="views\vue\baseinfo-properties-list.vue" />
+    <None Remove="views\vue\baseinfo-roles-editor.vue" />
+    <None Remove="views\vue\baseinfo-roles-list.vue" />
+    <None Remove="views\vue\baseinfo-roles-permission-editor.vue" />
+    <None Remove="views\vue\baseinfo-user-editor.vue" />
+    <None Remove="views\vue\baseinfo-user-list.vue" />
+    <None Remove="views\vue\baseinfo-user-permission-editor.vue" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="views\vue\baseinfo-department-editor.vue" />
+    <EmbeddedResource Include="views\vue\baseinfo-department-list.vue" />
+    <EmbeddedResource Include="views\vue\baseinfo-header.vue" />
+    <EmbeddedResource Include="views\vue\baseinfo-permission-editor.vue" />
+    <EmbeddedResource Include="views\vue\baseinfo-permission-list.vue" />
+    <EmbeddedResource Include="views\vue\baseinfo-properties-list.vue" />
+    <EmbeddedResource Include="views\vue\baseinfo-roles-editor.vue" />
+    <EmbeddedResource Include="views\vue\baseinfo-roles-list.vue" />
+    <EmbeddedResource Include="views\vue\baseinfo-roles-permission-editor.vue" />
+    <EmbeddedResource Include="views\vue\baseinfo-user-editor.vue" />
+    <EmbeddedResource Include="views\vue\baseinfo-user-list.vue" />
+    <EmbeddedResource Include="views\vue\baseinfo-user-permission-editor.vue" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BeetleX.WebFamily" Version="2.8.19.2214" />
+  </ItemGroup>
+
+</Project>

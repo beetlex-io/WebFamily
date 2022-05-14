@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31829.152
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeetleX.WebFamily.BasicInformation.App", "BeetleX.WebFamily.BasicInformation.App\BeetleX.WebFamily.BasicInformation.App.csproj", "{9E3511F2-39E6-419E-82AC-AB087A170AC5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeetleX.WebFamily.BasicInformation", "BeetleX.WebFamily.BasicInformation\BeetleX.WebFamily.BasicInformation.csproj", "{43B038C9-DD9D-478F-B39D-8F78E8380027}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E3511F2-39E6-419E-82AC-AB087A170AC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E3511F2-39E6-419E-82AC-AB087A170AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E3511F2-39E6-419E-82AC-AB087A170AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E3511F2-39E6-419E-82AC-AB087A170AC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43B038C9-DD9D-478F-B39D-8F78E8380027}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43B038C9-DD9D-478F-B39D-8F78E8380027}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43B038C9-DD9D-478F-B39D-8F78E8380027}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43B038C9-DD9D-478F-B39D-8F78E8380027}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C31494D9-9C2F-48F8-AC1E-2EE13CFF3C2B}
+	EndGlobalSection
+EndGlobal

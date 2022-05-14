@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthwindEFCoreSqlite", "NorthwindEFCore\NorthwindEFCoreSqlite.csproj", "{9981F529-9296-40A5-A6B9-1D35E7D754E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeetleX.Samples.WebFamily.Northwind", "BeetleX.Samples.WebFamily.Northwind\BeetleX.Samples.WebFamily.Northwind.csproj", "{3F122E86-EA7C-4135-9B34-17C2C947DC05}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9981F529-9296-40A5-A6B9-1D35E7D754E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9981F529-9296-40A5-A6B9-1D35E7D754E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9981F529-9296-40A5-A6B9-1D35E7D754E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9981F529-9296-40A5-A6B9-1D35E7D754E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F122E86-EA7C-4135-9B34-17C2C947DC05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F122E86-EA7C-4135-9B34-17C2C947DC05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F122E86-EA7C-4135-9B34-17C2C947DC05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F122E86-EA7C-4135-9B34-17C2C947DC05}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A32C563-ED59-48A4-8DBF-2868912DE0F3}
+	EndGlobalSection
+EndGlobal
