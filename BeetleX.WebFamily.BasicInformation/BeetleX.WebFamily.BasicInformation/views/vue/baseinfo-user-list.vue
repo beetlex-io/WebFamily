@@ -36,12 +36,12 @@
         </el-table-column>
         <el-table-column label="所属部门" width="150">
             <template slot-scope="item">
-                <label>{{item.row.DepartmentID}}</label>
+                <label>{{item.row.Department}}</label>
             </template>
         </el-table-column>
         <el-table-column label="上级负责人" width="150">
             <template slot-scope="item">
-                <label>{{item.row.SuperiorID}}</label>
+                <label>{{item.row.Supperior}}</label>
             </template>
         </el-table-column>
         <el-table-column label="手机">
