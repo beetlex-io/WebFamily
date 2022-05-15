@@ -6,6 +6,7 @@ Beetlex基于前后端分离设计的Web快速开发组件，服务端基于Beet
 ## 用户权限管理模块 (BeetleX.WebFamily.BasicInformation)
 - 用户管理
 - 部门管理
+- 角色管理
 - 权限配置
 - 基础属性配置
 - [在线演示](https://beetlex-io.com/systembase/)
