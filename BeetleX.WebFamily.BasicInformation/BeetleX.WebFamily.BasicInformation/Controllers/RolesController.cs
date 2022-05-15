@@ -14,24 +14,25 @@ namespace BeetleX.WebFamily.BasicInformation.Controllers
     [Authorize(Roles = new string[] { "Admin", "管理员", "系统管理员" })]
     public class RolesController
     {
-        public object List(string matchName, int page, int size, EFCoreDB<BaseInfoDBContext> db)
+        public object List(string matchName, int page, int size, EFCoreEntities<IBaseInfoDB> db)
         {
             SqlExpression<Role> exp = new SqlExpression<Role>();
             if (!string.IsNullOrEmpty(matchName))
                 exp &= r => r.Name.Contains(matchName);
-            var count = db.DBContext.Roles.Where(exp).Count();
-            var items = db.DBContext.Roles.Where(exp).Select(r => r).Skip(page * size).Take(size).ToArray();
+            var count = db.Entities.Roles.Where(exp).Count();
+            var items = db.Entities.Roles.Where(exp).Select(r => r).Skip(page * size).Take(size).ToArray();
             return new { items, count };
         }
 
-        public SQL2ObjectList<ExpandoObject> ListSelectOptions(EFCoreDB<BaseInfoDBContext> db) {
+        public SQL2ObjectList<ExpandoObject> ListSelectOptions(EFCoreEntities<IBaseInfoDB> db)
+        {
 
             return (db.DBContext, "select ID value,Name label,Note from Roles");
         }
 
-        public object Get(string id, EFCoreDB<BaseInfoDBContext> db)
+        public object Get(string id, EFCoreEntities<IBaseInfoDB> db)
         {
-            return db.DBContext.Roles.Find(id);
+            return db.Entities.Roles.Find(id);
         }
 
         public class PermissionAggre
@@ -54,9 +55,9 @@ namespace BeetleX.WebFamily.BasicInformation.Controllers
             }
         }
 
-        public void ModifyPermission(string id, List<PermissionAggre> items, EFCoreDB<BaseInfoDBContext> db)
+        public void ModifyPermission(string id, List<PermissionAggre> items, EFCoreEntities<IBaseInfoDB> db)
         {
-            var rolePermission = db.DBContext.RolePermissions.Where(p => p.RoleID == id).ToArray();
+            var rolePermission = db.Entities.RolePermissions.Where(p => p.RoleID == id).ToArray();
             foreach (var category in items)
             {
                 foreach (var item in category.Items)
@@ -72,15 +73,15 @@ namespace BeetleX.WebFamily.BasicInformation.Controllers
                         rec.RoleID = id;
                         rec.PermissionsID = item.PermissionsID;
                         rec.Value = item.Value ? 1 : 0;
-                        db.DBContext.RolePermissions.Add(rec);
+                        db.Entities.RolePermissions.Add(rec);
                     }
                 }
             }
         }
-        public object ListPermission(string id, EFCoreDB<BaseInfoDBContext> db)
+        public object ListPermission(string id, EFCoreEntities<IBaseInfoDB> db)
         {
-            var permission = db.DBContext.Permissions.OrderBy(p => p.Category).OrderBy(p => p.Name).ToArray();
-            var rolePermission = db.DBContext.RolePermissions.Where(p => p.RoleID == id).ToArray();
+            var permission = db.Entities.Permissions.OrderBy(p => p.Category).OrderBy(p => p.Name).ToArray();
+            var rolePermission = db.Entities.RolePermissions.Where(p => p.RoleID == id).ToArray();
 
             Dictionary<string, PermissionAggre> result = new Dictionary<string, PermissionAggre>();
             foreach (var item in permission)
@@ -106,27 +107,27 @@ namespace BeetleX.WebFamily.BasicInformation.Controllers
             return result.Values;
         }
 
-        public void Delete(string id, EFCoreDB<BaseInfoDBContext> db)
+        public void Delete(string id, EFCoreEntities<IBaseInfoDB> db)
         {
-            var item = db.DBContext.Roles.Find(id);
+            var item = db.Entities.Roles.Find(id);
             if (item?.SystemData == true)
                 ExceptionFactory.DELETE_SYSTEM_DATA_ERROR();
             if (item != null)
-                db.DBContext.Roles.Remove(item);
+                db.Entities.Roles.Remove(item);
         }
 
-        public void Modify(Role body, EFCoreDB<BaseInfoDBContext> db)
+        public void Modify(Role body, EFCoreEntities<IBaseInfoDB> db)
         {
             if (string.IsNullOrEmpty(body.ID))
             {
-                if (db.DBContext.Roles.Where(r => r.Name == body.Name).Count() > 0)
+                if (db.Entities.Roles.Where(r => r.Name == body.Name).Count() > 0)
                     ExceptionFactory.ROLS_ADD_NAME_EXISTS();
                 body.ID = Guid.NewGuid().ToString("N");
-                db.DBContext.Roles.Add(body);
+                db.Entities.Roles.Add(body);
             }
             else
             {
-                var role = db.DBContext.Roles.Find(body.ID);
+                var role = db.Entities.Roles.Find(body.ID);
                 if (role != null)
                 {
                     body.EntityCopyOut(role, "ID", "SystemData");

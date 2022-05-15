@@ -3,13 +3,13 @@
         <ul class="role-permission-list">
             <li v-for="(item,i) in items">
                 <div><el-link :icon="[item.extend?'el-icon-folder-opened':'el-icon-folder']" @click="item.extend=!item.extend">{{item.Category}}<span>({{item.Items.length}})</span></el-link></div>
-                <el-table v-if="item.extend" size="mini" :show-header="i==0" :data="item.Items" style="margin-left:20px;width:450px;">
+                <el-table v-if="item.extend" size="mini" :show-header="i==0" :data="item.Items" style="margin-left:20px;width:550px;">
                     <el-table-column label="功能名称" width="150">
                         <template slot-scope="item">
                             <label>{{item.row.Name}}</label>
                         </template>
                     </el-table-column>
-                    <el-table-column label="权限码" width="150">
+                    <el-table-column label="权限码" width="250">
                         <template slot-scope="item">
                             <label>{{item.row.Code}}</label>
                         </template>

@@ -13,4 +13,8 @@
     <ProjectReference Include="..\BeetleX.WebFamily.BasicInformation\BeetleX.WebFamily.BasicInformation.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="views\" />
+  </ItemGroup>
+
 </Project>

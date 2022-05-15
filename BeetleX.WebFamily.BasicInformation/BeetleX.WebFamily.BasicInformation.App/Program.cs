@@ -10,8 +10,6 @@ namespace BeetleX.WebFamily.BasicInformation.App
     {
         static void Main(string[] args)
         {
-
-
             WebHost host = new WebHost();
             WebHost.Title = "BeetleX用户权限系统";
             WebHost.HeaderModel = "baseinfo-header";
@@ -36,7 +34,7 @@ namespace BeetleX.WebFamily.BasicInformation.App
             })
             .UseJWT()
             .UseElement()
-            .UseEFCore<BaseInfoDBContext, MysqlBaseInfoDBContext>()
+            .UseEFCoreEntities<IBaseInfoDB, MysqlBaseInfoDBContext>()
             .Initialize((http, vue, resoure) =>
             {
                 resoure.AddCss("website.css");
@@ -45,14 +43,26 @@ namespace BeetleX.WebFamily.BasicInformation.App
         }
     }
 
-    public class MysqlBaseInfoDBContext : BaseInfoDBContext
+    public class MysqlBaseInfoDBContext : DbContext, IBaseInfoDB
     {
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Property> Properties { get; set; }
+        public DbSet<Permissions> Permissions { get; set; }
+        public DbSet<RolePermissions> RolePermissions { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<RolePermissions>()
+      .HasKey(c => new { c.RoleID, c.PermissionsID });
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
             var connectionString = "server=192.168.2.19;user=root;password=123456;database=baseinfo_test";
-            //var connectionString = "server=localhost;user=root;password=;database=baseinfo_test";
+            //var connectionString = "server=localhost;user=root;password=henry-0128;database=baseinfo_test";
             var serverVersion = new MySqlServerVersion(new Version(5, 7, 38));
             optionsBuilder.UseMySql(connectionString, serverVersion);
         }

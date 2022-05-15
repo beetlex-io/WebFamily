@@ -15,7 +15,7 @@ namespace BeetleX.WebFamily.BasicInformation
     [Authorize(Roles = new string[] { "Admin", "管理员", "系统管理员" })]
     public class UserController
     {
-        public object List(string matchName, string department, int page, int size, EFCoreDB<BaseInfoDBContext> db)
+        public object List(string matchName, string department, int page, int size, EFCoreEntities<IBaseInfoDB> db)
         {
 
             SQL sql = @"select 
@@ -41,7 +41,7 @@ namespace BeetleX.WebFamily.BasicInformation
             return new { items, count };
         }
 
-        public SQL2ObjectList<ExpandoObject> ListSelectOptions(EFCoreDB<BaseInfoDBContext> db)
+        public SQL2ObjectList<ExpandoObject> ListSelectOptions(EFCoreEntities<IBaseInfoDB> db)
         {
             SQL sql = @"select 
                         a.ID value,
@@ -54,49 +54,49 @@ namespace BeetleX.WebFamily.BasicInformation
             return (db.DBContext, sql);
         }
 
-        public object GetPermission(string id, EFCoreDB<BaseInfoDBContext> db)
+        public object GetPermission(string id, EFCoreEntities<IBaseInfoDB> db)
         {
-            return Utils.GetUserPermissionAggres(id, db.DBContext);
+            return Utils.GetUserPermissionAggres(id, db.Entities);
         }
 
-        public void Delete(string id, EFCoreDB<BaseInfoDBContext> db)
+        public void Delete(string id, EFCoreEntities<IBaseInfoDB> db)
         {
-            var user = db.DBContext.Users.Find(id);
+            var user = db.Entities.Users.Find(id);
             if (user?.SystemData == true)
                 ExceptionFactory.DELETE_SYSTEM_DATA_ERROR();
             if (user != null)
-                db.DBContext.Users.Remove(user);
+                db.Entities.Users.Remove(user);
         }
 
-        public object Get(string id, EFCoreDB<BaseInfoDBContext> db)
+        public object Get(string id, EFCoreEntities<IBaseInfoDB> db)
         {
-            return db.DBContext.Users.Find(id);
+            return db.Entities.Users.Find(id);
         }
 
-        public void Modify(User body, EFCoreDB<BaseInfoDBContext> db)
+        public void Modify(User body, EFCoreEntities<IBaseInfoDB> db)
         {
             if (string.IsNullOrEmpty(body.ID))
             {
-                if (db.DBContext.Users.Where(user => user.EMail == body.EMail).Count() > 0)
+                if (db.Entities.Users.Where(user => user.EMail == body.EMail).Count() > 0)
                     ExceptionFactory.USER_ADD_EMAIL_EXISTS();
-                if (db.DBContext.Users.Where(user => user.WorkNumber == body.WorkNumber).Count() > 0)
+                if (db.Entities.Users.Where(user => user.WorkNumber == body.WorkNumber).Count() > 0)
                     ExceptionFactory.USER_ADD_WORKNUMBER_EXISTS();
                 body.ID = Guid.NewGuid().ToString("N");
                 body.LoginPassword = Utils.HashPassword(Utils.DefaultPassword);
-                db.DBContext.Users.Add(body);
+                db.Entities.Users.Add(body);
             }
             else
             {
-                if (db.DBContext.Users.Where(user => user.EMail == body.EMail
+                if (db.Entities.Users.Where(user => user.EMail == body.EMail
                 && user.ID != body.ID
                 ).Count() > 0)
                     ExceptionFactory.USER_ADD_EMAIL_EXISTS();
 
-                if (db.DBContext.Users.Where(
+                if (db.Entities.Users.Where(
                     user => user.WorkNumber == body.WorkNumber
                     && user.ID != body.ID).Count() > 0)
                     ExceptionFactory.USER_ADD_WORKNUMBER_EXISTS();
-                var user = db.DBContext.Users.Find(body.ID);
+                var user = db.Entities.Users.Find(body.ID);
                 if (user != null)
                 {
                     body.EntityCopyOut(user, "ID", "SystemData", "LoginPassword", "Enabled");
@@ -104,19 +104,19 @@ namespace BeetleX.WebFamily.BasicInformation
             }
         }
 
-        public void Enabled(string id, bool enabled, EFCoreDB<BaseInfoDBContext> db)
+        public void Enabled(string id, bool enabled, EFCoreEntities<IBaseInfoDB> db)
         {
-            var user = db.DBContext.Users.Find(id);
+            var user = db.Entities.Users.Find(id);
             if (user?.SystemData == true)
                 ExceptionFactory.DELETE_SYSTEM_DATA_ERROR();
             if (user != null)
                 user.Enabled = enabled;
         }
 
-        public void ChangePassword(string id, string password, EFCoreDB<BaseInfoDBContext> db)
+        public void ChangePassword(string id, string password, EFCoreEntities<IBaseInfoDB> db)
         {
             password = Utils.HashPassword(password);
-            var user = db.DBContext.Users.Find(id);
+            var user = db.Entities.Users.Find(id);
             if (user != null)
                 user.LoginPassword = password;
         }

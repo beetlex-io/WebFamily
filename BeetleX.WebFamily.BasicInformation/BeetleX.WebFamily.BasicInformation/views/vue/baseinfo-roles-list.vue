@@ -36,7 +36,7 @@
             </el-pagination>
         </div>
     </el-table>
-    <el-dialog title="角色权限设置" :visible.sync="dialogPermissionVisible" @opened="onOpenPermission" width="520px" :append-to-body="true" :close-on-click-modal="false">
+    <el-dialog title="角色权限设置" :visible.sync="dialogPermissionVisible" @opened="onOpenPermission" width="620px" :append-to-body="true" :close-on-click-modal="false">
         <baseinfo-roles-permission-editor ref="editPermission" @close="dialogPermissionVisible=false;">
 
         </baseinfo-roles-permission-editor>

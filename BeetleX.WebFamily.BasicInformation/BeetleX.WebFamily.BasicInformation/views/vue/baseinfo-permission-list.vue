@@ -24,7 +24,7 @@
                 <el-link @click="onSelect(item.row)">{{item.row.Name}}</el-link>
             </template>
         </el-table-column>
-        <el-table-column label="权限码" width="150">
+        <el-table-column label="权限码" width="250">
             <template slot-scope="item">
                 <label>{{item.row.Code}}</label>
             </template>

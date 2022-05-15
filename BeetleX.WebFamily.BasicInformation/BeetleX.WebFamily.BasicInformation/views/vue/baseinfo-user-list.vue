@@ -70,7 +70,7 @@
             </el-pagination>
         </div>
     </el-table>
-    <el-dialog title="用户权限" :visible.sync="permissionDialogVisible" @opened="onOpenPermission" width="540px" :append-to-body="true" :close-on-click-modal="false">
+    <el-dialog title="用户权限" :visible.sync="permissionDialogVisible" @opened="onOpenPermission" width="640px" :append-to-body="true" :close-on-click-modal="false">
         <baseinfo-user-permission-editor @close="permissionDialogVisible=false" ref="permissionEditor"></baseinfo-user-permission-editor>
     </el-dialog>
 

@@ -18,7 +18,7 @@ namespace BeetleX.WebFamily.BasicInformation
             return BeetleX.FastHttpApi.Utils.EncryptToSHA1(password);
         }
 
-        public static Dictionary<string, bool> GetUserPermission(string userid, BaseInfoDBContext db)
+        public static Dictionary<string, bool> GetUserPermission(string userid, IBaseInfoDB db)
         {
             var items = GetUserPermissionAggres(userid, db);
             Dictionary<string, bool> result = new Dictionary<string, bool>();
@@ -32,7 +32,7 @@ namespace BeetleX.WebFamily.BasicInformation
             return result;
         }
 
-        public static List<UserPermissionAggre> GetUserPermissionAggres(string userid, BaseInfoDBContext db)
+        public static List<UserPermissionAggre> GetUserPermissionAggres(string userid, IBaseInfoDB db)
         {
 
             var user = db.Users.Find(userid);
