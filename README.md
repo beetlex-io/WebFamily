@@ -45,7 +45,7 @@ class Program
             })
             .UseJWT()
             .UseElement()
-            .UseEFCore<BaseInfoDBContext, MysqlBaseInfoDBContext>()
+            .UseEFCoreEntities<IBaseInfoDB, MysqlBaseInfoDBContext>()
             .Initialize((http, vue, resoure) =>
             {
                 resoure.AddCss("website.css");
