@@ -14,9 +14,6 @@
             </el-option>
         </el-select>
         <el-button size="mini" @click="page=0;onList()" style="margin-left:5px;"><i class="fa-solid fa-magnifying-glass"></i></el-button>
-        <el-button size="mini" @click="onRefresh" style="margin-left:5px;">
-            <i class="fa-solid fa-arrow-rotate-right"></i>
-        </el-button>
     </div>
     <el-table size="mini" :data="items">
         <el-table-column label="员工编号" width="100">
@@ -49,11 +46,15 @@
                 <label>{{item.row.MobilePhone}}</label>
             </template>
         </el-table-column>
+
+
         <el-table-column label="用效" width="80">
             <template slot-scope="item">
-                <el-switch size="mini" v-model="item.row.Enabled" @change="onEnabled(item.row)"></el-switch>
+                <el-switch size="mini" v-model="item.row.Enabled" :disabled="item.row.SystemData" @change="onEnabled(item.row)"></el-switch>
             </template>
         </el-table-column>
+
+
         <el-table-column label="" width="120" align="right">
             <template slot-scope="item">
                 <el-button @click="selectID=item.row.ID;permissionDialogVisible=true" title="查看权限" size="mini">
@@ -126,10 +127,6 @@
                     this.onListDepartmentOpetions();
                 }
             },
-            onRefresh() {
-                this.onListDepartmentOpetions();
-                this.onList();
-            },
             onOpen() {
                 this.$refs.editor.onGet(this.selectID);
             },
@@ -145,6 +142,7 @@
                         });
                         this.count = r.count;
                     });
+                this.onListDepartmentOpetions();
             },
             onListDepartmentOpetions() {
                 this.$get("/baseinfo/department/ListSelectOptions").then(r => {
@@ -154,7 +152,7 @@
 
         },
         mounted() {
-            this.onListDepartmentOpetions();
+
             this.onList();
         }
     }

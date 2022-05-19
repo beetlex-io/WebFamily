@@ -59,13 +59,7 @@
                     });
                 }
                 else {
-                    this.record = {
-                        ID: null,
-                        Category: null,
-                        Name: null,
-                        Code: null,
-                        Note: null,
-                    };
+                    this.$clearObject(this.record);
                 }
                 this.onListCategoriesOptions();
             },

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BeetleX.WebFamily.BasicInformation
 {
-    public interface IBaseInfoDB
+    public interface IBaseInfoDB : IDisposable
     {
 
         DbSet<User> Users { get; set; }

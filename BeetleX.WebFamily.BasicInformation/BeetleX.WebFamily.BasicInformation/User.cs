@@ -31,6 +31,8 @@ namespace BeetleX.WebFamily.BasicInformation
 
         public string Address { get; set; }
 
+        public bool IsAdmin { get; set; }
+
         public string MobilePhone { get; set; }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public DateTime BirthDay { get; set; }
@@ -41,11 +43,13 @@ namespace BeetleX.WebFamily.BasicInformation
 
         public string LoginPassword { get; set; }
 
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         //int 0,1
         public bool Enabled { get; set; }
 
         public string Icon { get; set; }
         //int 0,1
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public bool SystemData { get; set; }
 
         public string WeiXinID { get; set; }

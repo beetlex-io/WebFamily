@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
@@ -8,6 +9,8 @@ namespace BeetleX.WebFamily.BasicInformation
     [Table("Permissions")]
     public class Permissions
     {
+
+        [Key]
         public string ID { get; set; }
 
         public string Name { get; set; }

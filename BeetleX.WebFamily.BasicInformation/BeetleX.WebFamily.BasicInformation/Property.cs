@@ -9,6 +9,7 @@ namespace BeetleX.WebFamily.BasicInformation
     [Table("properties")]
     public class Property
     {
+       
         public string Category { get; set; }
 
         [Key]

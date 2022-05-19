@@ -22,5 +22,7 @@ namespace BeetleX.WebFamily.BasicInformation
         public string SuperiorID { get; set; }
 
         public bool SystemData { get; set; }
+
+        public string TelePhone { get; set; }
     }
 }

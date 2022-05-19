@@ -39,10 +39,7 @@
                     });
                 }
                 else {
-                    this.record = {
-                        Name: null,
-                        Note: null,
-                    }
+                    this.$clearObject(this.record);
                 }
             },
 

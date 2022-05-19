@@ -56,7 +56,7 @@ namespace BeetleX.WebFamily.BasicInformation
 
         public object GetPermission(string id, EFCoreEntities<IBaseInfoDB> db)
         {
-            return Utils.GetUserPermissionAggres(id, db.Entities);
+            return BaseInfoUtils.GetUserPermissionAggres(id, db.Entities);
         }
 
         public void Delete(string id, EFCoreEntities<IBaseInfoDB> db)
@@ -66,6 +66,7 @@ namespace BeetleX.WebFamily.BasicInformation
                 ExceptionFactory.DELETE_SYSTEM_DATA_ERROR();
             if (user != null)
                 db.Entities.Users.Remove(user);
+            DataCached.RefreshUsers(db.Entities);
         }
 
         public object Get(string id, EFCoreEntities<IBaseInfoDB> db)
@@ -75,14 +76,15 @@ namespace BeetleX.WebFamily.BasicInformation
 
         public void Modify(User body, EFCoreEntities<IBaseInfoDB> db)
         {
+            body.EMail = body.EMail.ToLower();
             if (string.IsNullOrEmpty(body.ID))
             {
+                body.ID = Guid.NewGuid().ToString("N");
                 if (db.Entities.Users.Where(user => user.EMail == body.EMail).Count() > 0)
                     ExceptionFactory.USER_ADD_EMAIL_EXISTS();
                 if (db.Entities.Users.Where(user => user.WorkNumber == body.WorkNumber).Count() > 0)
                     ExceptionFactory.USER_ADD_WORKNUMBER_EXISTS();
-                body.ID = Guid.NewGuid().ToString("N");
-                body.LoginPassword = Utils.HashPassword(Utils.DefaultPassword);
+                body.LoginPassword = BaseInfoUtils.HashPassword(BaseInfoUtils.DefaultPassword);
                 db.Entities.Users.Add(body);
             }
             else
@@ -102,6 +104,7 @@ namespace BeetleX.WebFamily.BasicInformation
                     body.EntityCopyOut(user, "ID", "SystemData", "LoginPassword", "Enabled");
                 }
             }
+            DataCached.RefreshUsers(db.Entities);
         }
 
         public void Enabled(string id, bool enabled, EFCoreEntities<IBaseInfoDB> db)
@@ -115,7 +118,7 @@ namespace BeetleX.WebFamily.BasicInformation
 
         public void ChangePassword(string id, string password, EFCoreEntities<IBaseInfoDB> db)
         {
-            password = Utils.HashPassword(password);
+            password = BaseInfoUtils.HashPassword(password);
             var user = db.Entities.Users.Find(id);
             if (user != null)
                 user.LoginPassword = password;

@@ -49,8 +49,8 @@
                         </el-option>
                         <el-option style="width:400px;" v-for="(item,index) in SuperiorID_options" v-if="record.ID!=item.value" :label="item.label" :value="item.value" key="item.value">
                             <span style="float: left;width:100px;">{{item.label }}</span>
-                            <span style="float: left;padding-left:20px;" v-if="item.JobPostion">职位: {{item.JobPostion }}</span>
-                            <span style="float: right; width: 120px;" v-if="item.Department">部门: {{ item.Department }}</span>
+                            <span style="float: left;padding-left:20px;" v-if="item.JobPostion"><b>职位:</b> {{item.JobPostion }}</span>
+                            <span style="float: right; width: 120px;" v-if="item.Department"><b>部门:</b> {{ item.Department }}</span>
                         </el-option>
                     </el-select>
                 </el-form-item>
@@ -97,12 +97,26 @@
         <el-row>
             <el-col :span="24">
                 <el-form-item label="角色" prop="role">
-                    <el-select size="mini" v-model="roles" multiple style="width:540px;">
+                    <el-select size="mini" v-model="roles" filterable multiple style="width:540px;">
                         <el-option v-for="(item,index) in role_options" :label="item.label" :value="item.value" key="item.value">
                             <span style="float: left;width:100px;">{{item.label }}</span>
                             <span style="float: inherit;padding-left:20px;">{{item.Note}}</span>
                         </el-option>
                     </el-select>
+                </el-form-item>
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col :span="24">
+                <el-form-item label="">
+                    <el-button size="mini" @click="passwordDialogVisible=true;" icon="fa-solid fa-key">设置密码</el-button>
+                </el-form-item>
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col :span="24">
+                <el-form-item label="系统管理员" prop="IsAdmin">
+                    <el-switch size="mini" :disabled="record.SystemData" v-model="record.IsAdmin" type="textarea"></el-switch>
                 </el-form-item>
             </el-col>
         </el-row>
@@ -120,6 +134,9 @@
             </el-col>
         </el-row>
     </el-form>
+    <el-dialog top="30vh" title="用户权限" :visible.sync="passwordDialogVisible" @opened="onOpenpassword" width="400px" :append-to-body="true" :close-on-click-modal="false">
+        <baseinfo-user-changepassword @close="passwordDialogVisible=false" ref="passwordEditor"></baseinfo-user-changepassword>
+    </el-dialog>
 </div>
 <script>
     export default {
@@ -136,7 +153,9 @@
                 role_options: [],
                 Sex_options: [{ value: '男', label: '男' }, { value: '女', label: '女' }],
                 roles: [],
+                passwordDialogVisible: false,
                 record: {
+                    ID: null,
                     WorkNumber: null,
                     Name: null,
                     EMail: null,
@@ -154,10 +173,14 @@
                     Note: null,
                     Enabled: false,
                     Roles: '',
+                    IsAdmin: false,
                 }
             };
         },
         methods: {
+            onOpenpassword() {
+                this.$refs.passwordEditor.onGet(this.record.ID);
+            },
             onGet(id) {
                 if (id) {
                     this.$get('/baseinfo/users/get', { id: id }).then(r => {
@@ -170,25 +193,9 @@
                     });
                 }
                 else {
-                    this.record = {
-                        WorkNumber: null,
-                        Name: null,
-                        EMail: null,
-                        JobPostion: null,
-                        MobilePhone: null,
-                        TelePhone: null,
-                        DepartmentID: null,
-                        SuperiorID: null,
-                        EntryDay: null,
-                        BirthDay: null,
-                        Sex: '男',
-                        Icon: null,
-                        Address: null,
-                        WeiXunID: null,
-                        Note: null,
-                        Enabled: false,
-                        Roles: '',
-                    };
+                    this.$clearObject(this.record);
+                    this.record.IsAdmin = false;
+                    this.record.Enabled = false;
                     this.roles = [];
                 }
                 this.onListDepartmentOpetions();

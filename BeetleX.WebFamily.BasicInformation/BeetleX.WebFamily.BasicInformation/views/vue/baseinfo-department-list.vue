@@ -17,6 +17,11 @@
                 <label>{{item.row.Manager}}</label>
             </template>
         </el-table-column>
+        <el-table-column label="联系电话" width="160">
+            <template slot-scope="item">
+                <label>{{item.row.TelePhone}}</label>
+            </template>
+        </el-table-column>
         <el-table-column label="上级部门" width="160">
             <template slot-scope="item">
                 <label>{{item.row.Superior}}</label>

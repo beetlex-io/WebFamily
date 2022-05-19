@@ -49,7 +49,7 @@
                         <el-input size="mini" v-model="item.row.Value" @change="item.row.isEdit=true"></el-input>
                     </template>
                 </el-table-column>
-                <el-table-column label="OrderValue" width="140">
+                <el-table-column label="排序值" width="140">
                     <template slot-scope="item">
                         <el-input-number size="mini" style="width:120px;" @change="item.row.isEdit=true" v-model="item.row.OrderValue"></el-input-number>
                     </template>

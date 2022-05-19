@@ -20,8 +20,8 @@ namespace BeetleX.WebFamily.BasicInformation
             if (!string.IsNullOrEmpty(matchName))
                 exp &= p => p.Name.Contains(matchName);
 
-            SQL sql = @"select a.*,b.name Manager,c.name Superior from departments a left join users b on
-                        a.managerid = b.id left join departments c on a.superiorid = c.id where 1=1";
+            SQL sql = @"select a.*,c.name Superior from departments a 
+                    left join departments c on a.superiorid = c.id where 1=1";
             if (!string.IsNullOrEmpty(matchName))
             {
                 sql += " and a.name like @matchname";
@@ -29,6 +29,18 @@ namespace BeetleX.WebFamily.BasicInformation
             }
             int count = sql.Count(db.DBContext);
             var items = sql.List<ExpandoObject>(db.DBContext, new Region(page, size));
+            foreach (dynamic item in items)
+            {
+                if (!string.IsNullOrEmpty(item.ManagerID))
+                {
+                    item.Manager = DataCached.GetUserNames(db.Entities, item.ManagerID.Split(','));
+                }
+                else
+                {
+                    item.Manager = "";
+                }
+            }
+            //Manager
             return new { items = items, count = count };
         }
         public SQL2ObjectList<ExpandoObject> ListSelectOptions(EFCoreEntities<IBaseInfoDB> db)
@@ -57,6 +69,7 @@ namespace BeetleX.WebFamily.BasicInformation
                     body.EntityCopyOut(item, "ID", "SystemData");
                 }
             }
+            DataCached.RefreshDepartments(db.Entities);
 
         }
 
@@ -69,6 +82,7 @@ namespace BeetleX.WebFamily.BasicInformation
                     ExceptionFactory.DELETE_SYSTEM_DATA_ERROR();
                 db.Entities.Departments.Remove(item);
             }
+            DataCached.RefreshDepartments(db.Entities);
         }
     }
 }

@@ -4,13 +4,131 @@ using System.Text;
 using System.Linq;
 using BeetleX.EFCore.Extension;
 using System.Dynamic;
+using Microsoft.EntityFrameworkCore;
+using BeetleX.FastHttpApi;
 
 namespace BeetleX.WebFamily.BasicInformation
 {
-    public class Utils
+    [BeetleX.FastHttpApi.Controller]
+    public class InitialieController : BeetleX.FastHttpApi.IController
+    {
+        [NotAction]
+        public void Init(HttpApiServer server, string path)
+        {
+            BaseInfoUtils.Initialize?.Invoke(server);
+        }
+    }
+
+    public class DataCached
+    {
+        private static Dictionary<string, User> mUsers = new Dictionary<string, User>();
+
+        private static Dictionary<string, Department> mDepartments = new Dictionary<string, Department>();
+
+        public static Dictionary<string, Department> GetDepartments(IBaseInfoDB db)
+        {
+            lock (mDepartments)
+            {
+                if (mDepartments.Count == 0)
+                {
+                    foreach (var item in db.Departments)
+                    {
+                        mDepartments[item.ID] = item;
+                    }
+                }
+                return mDepartments;
+            }
+        }
+
+        public static void RefreshDepartments(IBaseInfoDB db)
+        {
+            lock (mDepartments)
+            {
+                foreach (var item in db.Departments)
+                {
+                    mDepartments[item.ID] = item;
+                }
+            }
+        }
+
+        public static string GetUserNames(IBaseInfoDB db, params string[] id)
+        {
+            List<string> result = new List<string>();
+            var users = GetUsers(db);
+            foreach (var item in id)
+            {
+                if (users.TryGetValue(item, out User user))
+                {
+                    result.Add(user.Name);
+                }
+            }
+            return string.Join(',', result.ToArray());
+        }
+
+        public static Dictionary<string, User> GetUsers(IBaseInfoDB db)
+        {
+            lock (mUsers)
+            {
+                if (mUsers.Count == 0)
+                {
+
+                    foreach (var item in db.Users)
+                    {
+                        mUsers[item.ID] = item;
+                    }
+
+                }
+                return mUsers;
+            }
+        }
+
+        public static void RefreshUsers(IBaseInfoDB db)
+        {
+            lock (mUsers)
+            {
+
+                foreach (var item in db.Users)
+                {
+                    mUsers[item.ID] = item;
+                }
+
+            }
+        }
+    }
+
+
+    public class BaseInfoUtils
     {
         public static string DefaultPassword { get; set; } = "123456";
         public static Func<string, string> HashPasswordHandler { get; set; }
+
+        public static Action<HttpApiServer> Initialize { get; set; }
+
+        public static User Login(IBaseInfoDB db, string email, string password)
+        {
+            password = HashPassword(password);
+            var user = db.Users.Where(p => p.EMail == email.ToLower() && p.LoginPassword == password && p.Enabled).FirstOrDefault();
+            return user;
+        }
+
+        public static void CreateAdmin(string email, IBaseInfoDB db)
+        {
+            var user = db.Users.FirstOrDefault(u => u.EMail == email.ToLower());
+            if (user == null)
+            {
+                user = new User();
+                user.ID = Guid.NewGuid().ToString("N");
+                user.Name = "管理员";
+                user.IsAdmin = true;
+                user.EMail = email.ToLower();
+                user.LoginPassword = HashPassword(DefaultPassword);
+                user.SystemData = true;
+                user.Enabled = true;
+                db.Users.Add(user);
+                ((DbContext)db).SaveChanges();
+            }
+        }
+
         public static string HashPassword(string password)
         {
             if (HashPasswordHandler != null)

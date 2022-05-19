@@ -21,7 +21,7 @@ namespace BeetleX.WebFamily.BasicInformation.App
             WebHost.GetMenus = (user, role, httpcontext) =>
             {
 
-                return Task.FromResult(Utils.GetMenus());
+                return Task.FromResult(BaseInfoUtils.GetMenus());
             };
             host.RegisterComponent<Program>()
             .RegisterComponent<User>()
