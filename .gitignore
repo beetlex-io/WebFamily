@@ -17,3 +17,8 @@ BeetleX.Samples.WebFamily.Northwind/.vs/BeetleX.Samples.WebFamily.Northwind/Desi
 BeetleX.WebFamily.BasicInformation/.vs/BeetleX.WebFamily.BasicInformation.App/DesignTimeBuild/.dtbcache.v2
 BeetleX.WebFamily.BasicInformation/BeetleX.WebFamily.BasicInformation.App/views/index.html
 BeetleX.WebFamily.BasicInformation/BeetleX.WebFamily.BasicInformation/views/index.html
+BeetleX.HelpViewer/.vs/
+BeetleX.HelpViewer/bin/
+BeetleX.HelpViewer/obj/
+BeetleX.HelpViewer/views/files/
+BeetleX.HelpViewer/Properties/

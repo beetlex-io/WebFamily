@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Beetlex WebFamily</title>
+    <link href="/css/beetlex-v1.css" rel="stylesheet" />
+    <script src="/js/beetlex-v1.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <div :class="menuSize=='min'?'context_min':'context_max'">
+            <keep-alive>
+                <el-tabs @tab-click="onTabclick" v-if="tabsEnabled" type="border-card" v-model="activeName" style="position:absolute;top:0px;left:0px;right:10px;bottom:10px;" class="win-tabs" :closable="true" @tab-remove="OnCloseWindows">
+                    <el-tab-pane v-for="item in windows" :name="item.id" v-bind:key="item.id">
+                        <span slot="label"><i v-if="item.icon" :class="item.icon"></i> {{item.title}}</span>
+                        <component :is="item.model" :token="item.data" :winid="item.id"></component>
+                    </el-tab-pane>
+                </el-tabs>
+                <component v-else :is="activeModel.model" :token="activeModel.data" :winid="activeModel.id"></component>
+            </keep-alive>
+        </div>
+        <el-dialog :visible.sync="loginDialogVisible" class="login-modal" @opened="onLoginOpened" :close-on-click-modal="false" :fullscreen="true" :show-close="false"
+                   width="500px"
+                   center>
+            <component ref="loginDialog" :is="loginModel"></component>
+        </el-dialog>
+        <component v-if="footerModel" :is="footerModel"></component>
+
+        <component v-if="leftModel" :is="leftModel"></component>
+
+        <component v-if="rightModel" :is="rightModel"></component>
+        <div :class="showImage" @click="showImage='high-img';">
+            <img :src="showImageSrc" @click="showImage='high-img';" />
+        </div>
+    </div>
+    <script>
+        var renderer = new marked.Renderer();
+        renderer.link = function (href, title, text) {
+            var link = marked.Renderer.prototype.link.apply(this, arguments);
+            return link.replace("<a", "<a target='_blank'");
+        };
+        marked.setOptions({
+            renderer: renderer
+        });
+        Vue.prototype.$getImageSrc = function (url) {
+            return url;
+        }
+        Vue.prototype.$changeImg = function (content, maxheight, center) {
+            content = content.replace(/<img.*?src="(.*?)">/gi, (data) => {
+                var regex = /<img.*?src="(.*?)"/;
+                var src = regex.exec(data.toString())[1];
+                src = this.$getImageSrc(src);
+                src = src.replace('%5C', '/');
+                if (ajaxBaseUrl)
+                    src = ajaxBaseUrl + src;
+                var cls = "post-img";
+                if (src.indexOf('faces') >= 0) {
+                    html = '<img class="faces-img" src="' + src + '"/>'
+                }
+                else {
+                    if (maxheight) {
+                        html = '<img class="' + cls + '" onclick="onShowImage(\'' + src + '\')" src="' + src + '" style="max-height:' + maxheight + 'px"/>'
+                    }
+                    else {
+                        html = '<img class="' + cls + '" src="' + src + '"/>'
+                    }
+                }
+                return html
+            });
+            return content;
+        };
+        Vue.prototype.$changeCode = function (content) {
+            content = content.replace(/<pre[\S\s]*?<\/pre>/gi, (data) => {
+                // console.log("code", data);
+                lines = data.split("\n");
+                if (!lines.length || lines.length < 10) {
+                    return data;
+                }
+                _codeblockid++;
+                var id = _codeblockid;
+                var result = '<div id="code' + id + '" style="display:none">' + data + '</div>'
+                result += '<a id="btn' + id + '" class="el-link el-link--default is-underline" href="javascript:void(0)" onclick="page.showCode(' + id + ')">{显示代码...}</a>';
+                return result;
+            });
+            return content;
+        };
+
+        function onShowImage(src) {
+            
+            page.showImage = 'show-img-start';
+            page.showImageSrc = src;
+            setTimeout(() => {
+                page.showImage = 'show-img-end';
+            }, 100);
+        }
+        pageInit = function (e) {
+
+            e.showImage = 'high-img';
+            e.showImageSrc = '';
+        };
+    </script>
+    <script src="/beetlex/js/webfamily.js"></script>
+</body>
+</html>

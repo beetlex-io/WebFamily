@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="helpviewer.db" />
+    <None Remove="views\css\vs.css" />
+    <None Remove="views\css\website.css" />
+    <None Remove="views\js\exif.js" />
+    <None Remove="views\js\highlight.js" />
+    <None Remove="views\js\marked.js" />
+    <None Remove="views\vue\helpviewer-doc-editor.vue" />
+    <None Remove="views\vue\helpviewer-doc-md.vue" />
+    <None Remove="views\vue\helpviewer-doc-view.vue" />
+    <None Remove="views\vue\helpviewer-folder-panel.vue" />
+    <None Remove="views\vue\helpviewer-header.vue" />
+    <None Remove="views\vue\helpviewer-home.vue" />
+    <None Remove="views\vue\helpviewer-setting.vue" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="helpviewer.db">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\css\vs.css" />
+    <EmbeddedResource Include="views\css\website.css" />
+    <EmbeddedResource Include="views\js\exif.js" />
+    <EmbeddedResource Include="views\js\highlight.js" />
+    <EmbeddedResource Include="views\js\marked.js" />
+    <EmbeddedResource Include="views\vue\helpviewer-doc-editor.vue" />
+    <EmbeddedResource Include="views\vue\helpviewer-doc-md.vue" />
+    <EmbeddedResource Include="views\vue\helpviewer-doc-view.vue" />
+    <EmbeddedResource Include="views\vue\helpviewer-folder-panel.vue" />
+    <EmbeddedResource Include="views\vue\helpviewer-header.vue" />
+    <EmbeddedResource Include="views\vue\helpviewer-home.vue" />
+    <EmbeddedResource Include="views\vue\helpviewer-setting.vue" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BeetleX.WebFamily" Version="2.9.9.2218" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.17" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="views\index.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="views\login.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="views\platformlogin.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
