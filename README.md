@@ -3,6 +3,9 @@ Beetlex基于前后端分离设计的Web快速开发组件，服务端基于Beet
 
 [UI生成工具](https://beetlex-io.com/uieditor/)
 
+## 文档编写预览(markdown)
+- [在线演示](https://beetlex-io.com/help/)
+
 ## 用户权限管理模块 (BeetleX.WebFamily.BasicInformation)
 - 用户管理
 - 部门管理
