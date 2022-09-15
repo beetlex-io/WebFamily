@@ -1,4 +1,5 @@
-﻿using BeetleX.FastHttpApi.EFCore.Extension;
+﻿using BeetleX.FastHttpApi;
+using BeetleX.FastHttpApi.EFCore.Extension;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,7 +17,11 @@ namespace BeetleX.WebFamily.BasicInformation.App
             WebHost.Login = true;
             WebHost.LoginHandler = (user, password, context) =>
             {
-                return Task.FromResult(new LoginResult { Role = "admin", Success = true });
+                return Task.FromResult(new LoginResult("admin", "admin"));
+            };
+            WebHost.OtherPlatformLogin = (string openid, OtherPlatformType type, IHttpContext context) =>
+            {
+                return Task.FromResult(new LoginResult("admin", "admin"));
             };
             WebHost.GetMenus = (user, role, httpcontext) =>
             {
@@ -61,8 +66,8 @@ namespace BeetleX.WebFamily.BasicInformation.App
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            var connectionString = "server=192.168.2.19;user=root;password=123456;database=baseinfo_test";
-            //var connectionString = "server=localhost;user=root;password=henry-0128;database=baseinfo_test";
+            //var connectionString = "server=192.168.2.19;user=root;password=123456;database=baseinfo_test";
+            var connectionString = "server=localhost;user=root;password=henry-0128;database=baseinfo_test";
             var serverVersion = new MySqlServerVersion(new Version(5, 7, 38));
             optionsBuilder.UseMySql(connectionString, serverVersion);
         }

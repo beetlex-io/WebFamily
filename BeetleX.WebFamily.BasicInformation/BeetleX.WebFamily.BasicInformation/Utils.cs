@@ -202,14 +202,14 @@ namespace BeetleX.WebFamily.BasicInformation
             List<Menu> result = new List<Menu>();
             var item = new Menu();
             item.ID = "department";
-            item.Img = "fa-solid fa-building-user";
+            item.Icon = "fa-solid fa-building-user";
             item.Name = "部门管理";
             item.Model = "baseinfo-department-list";
             result.Add(item);
 
             item = new Menu();
             item.ID = "users";
-            item.Img = "fa-solid fa-user-group";
+            item.Icon = "fa-solid fa-user-group";
             item.Name = "员工管理";
             item.Model = "baseinfo-user-list";
             result.Add(item);
@@ -217,21 +217,21 @@ namespace BeetleX.WebFamily.BasicInformation
 
             item = new Menu();
             item.ID = "roles";
-            item.Img = "fa-solid fa-people-group";
+            item.Icon = "fa-solid fa-people-group";
             item.Name = "系统角色";
             item.Model = "baseinfo-roles-list";
             result.Add(item);
 
             item = new Menu();
             item.ID = "permission";
-            item.Img = "fa-solid fa-sliders";
+            item.Icon = "fa-solid fa-sliders";
             item.Name = "功能权限";
             item.Model = "baseinfo-permission-list";
             result.Add(item);
 
             item = new Menu();
             item.ID = "properties";
-            item.Img = "fa-solid fa-database";
+            item.Icon = "fa-solid fa-database";
             item.Name = "基础数据";
             item.Model = "baseinfo-properties-list";
             result.Add(item);

@@ -40,20 +40,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BeetleX.WebFamily" Version="2.9.9.2218" />
+    <PackageReference Include="BeetleX.WebFamily" Version="2.9.15.2218" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.17" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="views\index.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="views\login.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="views\platformlogin.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>
